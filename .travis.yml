@@ -7,3 +7,16 @@ before_install:
 
 script:
   - docker run dockerjank/docker-flow npm run test:nowatch
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-1"
+  app: "docker-flow"
+  env: "DockerFlow-env"
+  bucket_name: "elasticbeanstalk-us-east-1-127976242177"
+  bucket_path: "docker-flow"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$SECRET_KEY"
